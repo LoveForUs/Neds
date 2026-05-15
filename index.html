@@ -1280,6 +1280,146 @@
         grid-auto-columns: 76%;
       }
     }
+
+
+    /* ===== PERBAIKAN PROFILE MEMBER: FOTO PENUH + KETERANGAN DI TENGAH ===== */
+    .member-card {
+      scroll-snap-align: start;
+      position: relative;
+      height: 370px;
+      border-radius: 22px;
+      overflow: hidden;
+      border: 1px solid rgba(255, 122, 0, 0.32);
+      text-align: center;
+      transition: 0.3s;
+      background: #171717;
+      box-shadow: 0 18px 38px rgba(0, 0, 0, 0.35);
+      cursor: pointer;
+    }
+
+    .member-card:hover {
+      transform: translateY(-6px);
+      border-color: #ff7a00;
+      box-shadow: 0 24px 50px rgba(0, 0, 0, 0.48), 0 0 24px rgba(255, 122, 0, 0.18);
+    }
+
+    .member-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center top;
+      display: block;
+      background: #111111;
+      transition: 0.45s ease;
+    }
+
+    .member-card:hover img {
+      transform: scale(1.06);
+    }
+
+    .member-card::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      pointer-events: none;
+      background: linear-gradient(
+        180deg,
+        rgba(0, 0, 0, 0.02) 20%,
+        rgba(0, 0, 0, 0.28) 55%,
+        rgba(0, 0, 0, 0.88) 100%
+      );
+    }
+
+    .member-info {
+      position: absolute;
+      left: 50%;
+      bottom: 0;
+      z-index: 2;
+      width: 100%;
+      transform: translateX(-50%);
+      padding: 18px 14px 22px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+    }
+
+    .member-info h3 {
+      color: #ffffff;
+      margin-bottom: 7px;
+      font-size: 17px;
+      line-height: 1.2;
+      text-align: center;
+      text-shadow: 0 3px 10px rgba(0, 0, 0, 0.85);
+    }
+
+    .member-division {
+      display: inline-block;
+      margin-bottom: 7px;
+      padding: 5px 10px;
+      border-radius: 999px;
+      background: rgba(255, 122, 0, 0.94);
+      color: #111111;
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      font-size: 12px;
+      font-weight: bold;
+      text-align: center;
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.35);
+    }
+
+    .member-info p {
+      color: #f2f2f2;
+      font-size: 13px;
+      text-align: center;
+      text-shadow: 0 2px 8px rgba(0, 0, 0, 0.8);
+    }
+
+    .member-lightbox-frame img {
+      width: 100%;
+      max-height: 78vh;
+      object-fit: contain;
+      object-position: center;
+      display: block;
+      border-radius: 16px;
+      background: #111111;
+    }
+
+    @media (max-width: 650px) {
+      .member-card {
+        height: 305px;
+      }
+
+      .member-card img {
+        height: 100%;
+        object-fit: cover;
+      }
+
+      .member-info {
+        padding: 16px 10px 18px;
+      }
+
+      .member-info h3 {
+        font-size: 14px;
+      }
+
+      .member-division {
+        font-size: 11px;
+        padding: 4px 9px;
+      }
+
+      .member-info p {
+        font-size: 12px;
+      }
+    }
+
+    @media (max-width: 420px) {
+      .member-card {
+        height: 330px;
+      }
+    }
+
   </style>
 </head>
 <body>
@@ -1712,6 +1852,49 @@
         behavior: "smooth"
       });
     }
+
+
+    /* ===== LIGHTBOX FOTO MEMBER: KLIK BINGKAI UNTUK MEMPERBESAR FOTO ===== */
+    function openMemberLightbox(imageSrc, imageAlt) {
+      const lightbox = document.getElementById("memberLightbox");
+      const lightboxImage = document.getElementById("memberLightboxImage");
+
+      lightboxImage.src = imageSrc;
+      lightboxImage.alt = imageAlt || "Foto Member";
+      lightbox.classList.add("active");
+      document.body.style.overflow = "hidden";
+    }
+
+    function closeMemberLightbox(event) {
+      if (
+        event.target.id === "memberLightbox" ||
+        event.target.classList.contains("member-lightbox-close")
+      ) {
+        const lightbox = document.getElementById("memberLightbox");
+        const lightboxImage = document.getElementById("memberLightboxImage");
+        lightbox.classList.remove("active");
+        lightboxImage.src = "";
+        document.body.style.overflow = "";
+      }
+    }
+
+    document.querySelectorAll(".member-card").forEach((card) => {
+      card.addEventListener("click", () => {
+        const img = card.querySelector("img");
+        openMemberLightbox(img.src, img.alt);
+      });
+    });
+
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape") {
+        const lightbox = document.getElementById("memberLightbox");
+        const lightboxImage = document.getElementById("memberLightboxImage");
+        lightbox.classList.remove("active");
+        lightboxImage.src = "";
+        document.body.style.overflow = "";
+      }
+    });
+
   </script>
 
 </body>
