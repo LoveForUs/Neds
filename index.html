@@ -1,0 +1,1100 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SMKN 2 Sukorejo Esport</title>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background: #0d0d0d;
+      color: #ffffff;
+      line-height: 1.6;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .container {
+      width: 90%;
+      max-width: 1200px;
+      margin: auto;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: rgba(13, 13, 13, 0.92);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(255, 122, 0, 0.3);
+    }
+
+    nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 18px 0;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 22px;
+      font-weight: bold;
+      color: #ff7a00;
+      letter-spacing: 1px;
+    }
+
+    .logo img {
+      width: 46px;
+      height: 46px;
+      object-fit: contain;
+      border-radius: 10px;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 24px;
+      font-size: 15px;
+    }
+
+    .nav-links a {
+      color: #eeeeee;
+      transition: 0.3s;
+    }
+
+    .nav-links a:hover {
+      color: #ff7a00;
+    }
+
+    .hero {
+      position: relative;
+      min-height: 90vh;
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+    }
+
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+    }
+
+    .hero-bg img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0;
+      transform: scale(1.08);
+      animation: heroSlideshow 18s infinite;
+    }
+
+    .hero-bg img:nth-child(1) {
+      animation-delay: 0s;
+    }
+
+    .hero-bg img:nth-child(2) {
+      animation-delay: 6s;
+    }
+
+    .hero-bg img:nth-child(3) {
+      animation-delay: 12s;
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      background: linear-gradient(90deg, rgba(0, 0, 0, 0.12), transparent 55%);
+      pointer-events: none;
+    }
+
+    @keyframes heroSlideshow {
+      0% {
+        opacity: 0;
+        transform: scale(1.08);
+      }
+      8% {
+        opacity: 1;
+      }
+      33% {
+        opacity: 1;
+        transform: scale(1);
+      }
+      41% {
+        opacity: 0;
+        transform: scale(1);
+      }
+      100% {
+        opacity: 0;
+        transform: scale(1.08);
+      }
+    }
+
+    .hero .container {
+      position: relative;
+      z-index: 2;
+    }
+
+    .hero-content {
+      max-width: 720px;
+      padding: 34px;
+      border-radius: 26px;
+      background: rgba(0, 0, 0, 0.68);
+      border: 1px solid rgba(255, 122, 0, 0.28);
+      backdrop-filter: blur(8px);
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.45);
+    }
+
+    .hero-logo {
+      width: 190px;
+      max-width: 70%;
+      height: auto;
+      display: block;
+      margin-bottom: 22px;
+      filter: drop-shadow(0 12px 28px rgba(255, 122, 0, 0.28));
+    }
+
+    .badge {
+      display: inline-block;
+      background: rgba(255, 122, 0, 0.15);
+      color: #ff9f3f;
+      border: 1px solid rgba(255, 122, 0, 0.45);
+      padding: 8px 14px;
+      border-radius: 999px;
+      margin-bottom: 18px;
+      font-size: 14px;
+    }
+
+    .hero h1 {
+      font-size: clamp(42px, 7vw, 76px);
+      line-height: 1.05;
+      margin-bottom: 20px;
+    }
+
+    .hero h1 span {
+      color: #ff7a00;
+    }
+
+    .hero p {
+      font-size: 18px;
+      color: #dddddd;
+      margin-bottom: 32px;
+      max-width: 620px;
+    }
+
+    .btn-group {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      padding: 13px 22px;
+      border-radius: 10px;
+      font-weight: bold;
+      transition: 0.3s;
+      display: inline-block;
+    }
+
+    .btn-primary {
+      background: #ff7a00;
+      color: #111111;
+    }
+
+    .btn-primary:hover {
+      background: #ff9a33;
+      transform: translateY(-3px);
+    }
+
+    .btn-secondary {
+      border: 1px solid #ff7a00;
+      color: #ff7a00;
+    }
+
+    .btn-secondary:hover {
+      background: #ff7a00;
+      color: #111111;
+      transform: translateY(-3px);
+    }
+
+    section {
+      padding: 90px 0;
+    }
+
+    .section-title {
+      text-align: center;
+      margin-bottom: 50px;
+    }
+
+    .section-title h2 {
+      font-size: 36px;
+      color: #ff7a00;
+      margin-bottom: 10px;
+    }
+
+    .section-title p {
+      color: #bbbbbb;
+      max-width: 650px;
+      margin: auto;
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 36px;
+      align-items: center;
+    }
+
+    .about-card {
+      background: #171717;
+      padding: 30px;
+      border-radius: 20px;
+      border: 1px solid rgba(255, 122, 0, 0.25);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25);
+    }
+
+    .about-card h3 {
+      color: #ff7a00;
+      margin-bottom: 12px;
+      font-size: 24px;
+    }
+
+    .about-card p {
+      color: #d5d5d5;
+      margin-bottom: 14px;
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+
+    .stat-box {
+      background: linear-gradient(145deg, #1a1a1a, #111111);
+      padding: 24px;
+      border-radius: 18px;
+      text-align: center;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .stat-box h3 {
+      color: #ff7a00;
+      font-size: 34px;
+    }
+
+    .stat-box p {
+      color: #bbbbbb;
+      font-size: 14px;
+    }
+
+    .division-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 24px;
+    }
+
+    .division-card {
+      position: relative;
+      overflow: hidden;
+      min-height: 330px;
+      padding: 32px;
+      border-radius: 24px;
+      background: #171717;
+      border: 1px solid rgba(255, 122, 0, 0.25);
+      box-shadow: 0 20px 45px rgba(0, 0, 0, 0.28);
+      transition: 0.3s;
+    }
+
+    .division-card:hover {
+      transform: translateY(-8px);
+      border-color: #ff7a00;
+    }
+
+    .division-card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at top right, rgba(255, 122, 0, 0.35), transparent 45%);
+      pointer-events: none;
+    }
+
+    .division-content {
+      position: relative;
+      z-index: 1;
+    }
+
+    .division-badge {
+      display: inline-block;
+      padding: 7px 12px;
+      border-radius: 999px;
+      background: rgba(255, 122, 0, 0.16);
+      color: #ff9f3f;
+      border: 1px solid rgba(255, 122, 0, 0.35);
+      font-size: 13px;
+      margin-bottom: 18px;
+    }
+
+    .division-card h3 {
+      font-size: 30px;
+      color: #ffffff;
+      margin-bottom: 14px;
+    }
+
+    .division-card p {
+      color: #d6d6d6;
+      margin-bottom: 22px;
+    }
+
+    .division-list {
+      list-style: none;
+      display: grid;
+      gap: 10px;
+    }
+
+    .division-list li {
+      background: rgba(255, 255, 255, 0.06);
+      padding: 11px 14px;
+      border-radius: 12px;
+      color: #eeeeee;
+      border-left: 3px solid #ff7a00;
+    }
+
+    .gallery-carousel {
+      position: relative;
+      max-width: 980px;
+      margin: auto;
+      overflow: hidden;
+      border-radius: 26px;
+      border: 1px solid rgba(255, 122, 0, 0.28);
+      box-shadow: 0 25px 55px rgba(0, 0, 0, 0.35);
+      background: #171717;
+    }
+
+    .gallery-track {
+      display: flex;
+      transition: transform 0.5s ease-in-out;
+    }
+
+    .gallery-slide {
+      min-width: 100%;
+      position: relative;
+      height: 520px;
+      overflow: hidden;
+    }
+
+    .gallery-slide img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .gallery-slide::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(0,0,0,0.05), rgba(0,0,0,0.82));
+    }
+
+    .gallery-caption {
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      z-index: 2;
+      width: 100%;
+      padding: 34px;
+    }
+
+    .gallery-caption h3 {
+      font-size: 30px;
+      color: #ffffff;
+      margin-bottom: 8px;
+    }
+
+    .gallery-caption p {
+      color: #dddddd;
+      max-width: 620px;
+    }
+
+    .gallery-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 5;
+      width: 46px;
+      height: 46px;
+      border: none;
+      border-radius: 50%;
+      background: rgba(255, 122, 0, 0.9);
+      color: #111111;
+      font-size: 26px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .gallery-btn:hover {
+      background: #ffffff;
+      transform: translateY(-50%) scale(1.08);
+    }
+
+    .gallery-btn.prev {
+      left: 18px;
+    }
+
+    .gallery-btn.next {
+      right: 18px;
+    }
+
+    .gallery-dots {
+      position: absolute;
+      left: 50%;
+      bottom: 18px;
+      transform: translateX(-50%);
+      z-index: 6;
+      display: flex;
+      gap: 9px;
+    }
+
+    .gallery-dot {
+      width: 11px;
+      height: 11px;
+      border-radius: 50%;
+      border: none;
+      background: rgba(255, 255, 255, 0.45);
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .gallery-dot.active {
+      width: 30px;
+      border-radius: 999px;
+      background: #ff7a00;
+    }
+
+    .member-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 22px;
+    }
+
+    .member-card {
+      background: #171717;
+      border-radius: 20px;
+      overflow: hidden;
+      border: 1px solid rgba(255, 122, 0, 0.22);
+      text-align: center;
+      transition: 0.3s;
+    }
+
+    .member-card:hover {
+      transform: translateY(-8px);
+      border-color: #ff7a00;
+    }
+
+    .member-card img {
+      width: 100%;
+      height: 250px;
+      object-fit: cover;
+    }
+
+    .member-info {
+      padding: 20px;
+    }
+
+    .member-info h3 {
+      color: #ffffff;
+      margin-bottom: 5px;
+    }
+
+    .member-info p {
+      color: #ff9f3f;
+      font-size: 14px;
+    }
+
+    .attendance-box {
+      position: relative;
+      overflow: hidden;
+      background: linear-gradient(145deg, #171717, #101010);
+      border: 1px solid rgba(255, 122, 0, 0.28);
+      border-radius: 26px;
+      padding: 46px;
+      box-shadow: 0 25px 55px rgba(0, 0, 0, 0.35);
+      display: grid;
+      grid-template-columns: 1.5fr 1fr;
+      gap: 28px;
+      align-items: center;
+    }
+
+    .attendance-box::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at top right, rgba(255, 122, 0, 0.34), transparent 42%);
+      pointer-events: none;
+    }
+
+    .attendance-content,
+    .attendance-action {
+      position: relative;
+      z-index: 1;
+    }
+
+    .attendance-content h2 {
+      color: #ff7a00;
+      font-size: 36px;
+      margin-bottom: 12px;
+    }
+
+    .attendance-content p {
+      color: #d8d8d8;
+      margin-bottom: 16px;
+    }
+
+    .attendance-list {
+      list-style: none;
+      display: grid;
+      gap: 10px;
+      margin-top: 18px;
+    }
+
+    .attendance-list li {
+      background: rgba(255, 255, 255, 0.06);
+      border-left: 3px solid #ff7a00;
+      border-radius: 12px;
+      padding: 11px 14px;
+      color: #eeeeee;
+    }
+
+    .attendance-action {
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 22px;
+      padding: 28px;
+      text-align: center;
+    }
+
+    .attendance-icon {
+      width: 70px;
+      height: 70px;
+      margin: 0 auto 18px;
+      border-radius: 20px;
+      background: #ff7a00;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #111111;
+    }
+
+    .attendance-icon svg {
+      width: 38px;
+      height: 38px;
+      fill: currentColor;
+    }
+
+    .attendance-action h3 {
+      font-size: 24px;
+      margin-bottom: 10px;
+    }
+
+    .attendance-action p {
+      color: #cfcfcf;
+      font-size: 15px;
+      margin-bottom: 22px;
+    }
+
+    .social-box {
+      background: linear-gradient(135deg, #ff7a00, #ff3d00);
+      color: #111111;
+      border-radius: 26px;
+      padding: 42px;
+      text-align: center;
+    }
+
+    .social-box h2 {
+      font-size: 34px;
+      margin-bottom: 12px;
+    }
+
+    .social-box p {
+      max-width: 620px;
+      margin: 0 auto 26px;
+      color: #1f1f1f;
+    }
+
+    .social-links {
+      display: flex;
+      justify-content: center;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .social-links a {
+      background: #111111;
+      color: #ffffff;
+      padding: 12px 18px;
+      border-radius: 10px;
+      font-weight: bold;
+      transition: 0.3s;
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+    }
+
+    .social-links svg {
+      width: 21px;
+      height: 21px;
+      fill: currentColor;
+      flex-shrink: 0;
+    }
+
+    .social-links a:hover {
+      background: #ffffff;
+      color: #111111;
+      transform: translateY(-3px);
+    }
+
+    footer {
+      padding: 28px 0;
+      text-align: center;
+      background: #080808;
+      color: #999999;
+      font-size: 14px;
+      border-top: 1px solid rgba(255, 122, 0, 0.25);
+    }
+
+    @media (max-width: 900px) {
+      .about-grid,
+      .division-grid,
+      .member-grid,
+      .attendance-box {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .stats {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 650px) {
+      .nav-links {
+        display: none;
+      }
+
+      .hero {
+        min-height: 82vh;
+      }
+
+      .hero-content {
+        padding: 24px;
+        border-radius: 20px;
+        background: rgba(0, 0, 0, 0.72);
+      }
+
+      .about-grid,
+      .division-grid,
+      .member-grid {
+        grid-template-columns: 1fr;
+      }
+
+      section {
+        padding: 70px 0;
+      }
+
+      .gallery-slide {
+        height: 360px;
+      }
+
+      .gallery-caption {
+        padding: 24px;
+      }
+
+      .gallery-caption h3 {
+        font-size: 24px;
+      }
+
+      .gallery-btn {
+        width: 38px;
+        height: 38px;
+        font-size: 20px;
+      }
+
+      .attendance-box {
+        padding: 30px 20px;
+      }
+
+      .attendance-content h2 {
+        font-size: 30px;
+      }
+
+      .social-box {
+        padding: 30px 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="container">
+      <nav>
+        <div class="logo">
+          <img src="assets/neds-logo.png" alt="Logo NEDS Esport" />
+          <span>NEDS ESPORT</span>
+        </div>
+        <div class="nav-links">
+          <a href="#home">Home</a>
+          <a href="#about">About Us</a>
+          <a href="#divisi">Divisi Game</a>
+          <a href="#gallery">Galeri</a>
+          <a href="#member">Member</a>
+          <a href="#absensi">Absensi</a>
+          <a href="#sosmed">Sosial Media</a>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <section class="hero" id="home">
+    <div class="hero-bg">
+      <img src="https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&w=1600&q=80" alt="Background Esport 1" />
+      <img src="https://images.unsplash.com/photo-1511512578047-dfb367046420?auto=format&fit=crop&w=1600&q=80" alt="Background Esport 2" />
+      <img src="https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=1600&q=80" alt="Background Esport 3" />
+    </div>
+
+    <div class="container">
+      <div class="hero-content">
+        <img class="hero-logo" src="assets/neds-logo.png" alt="Logo NEDS Esport" />
+        <div class="badge">Official Esport Community</div>
+        <h1>SMK Negeri 2 Sukorejo <span>Esport</span></h1>
+        <p>
+          Wadah untuk siswa yang ingin berkembang di dunia esport secara positif,
+          sportif, kreatif, dan kompetitif. Bersama kita bangun tim yang solid dan berprestasi.
+        </p>
+        <div class="btn-group">
+          <a href="#member" class="btn btn-primary">Lihat Member</a>
+          <a href="#absensi" class="btn btn-secondary">Isi Absensi</a>
+          <a href="#sosmed" class="btn btn-secondary">Ikuti Sosmed</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="about">
+    <div class="container">
+      <div class="section-title">
+        <h2>About Us</h2>
+        <p>Kenali komunitas esport kami lebih dekat.</p>
+      </div>
+
+      <div class="about-grid">
+        <div class="about-card">
+          <h3>Siapa Kami?</h3>
+          <p>
+            Neds Esport adalah komunitas siswa melalui ekstrakurikuler sekolah yang berfokus pada pengembangan
+            bakat, kerja sama tim, strategi, dan kreativitas melalui dunia esport.
+          </p>
+          <p>
+            Kami percaya bahwa esport bukan hanya tentang bermain game, tetapi juga tentang
+            disiplin, komunikasi, tanggung jawab, dan semangat berkompetisi secara sehat.
+          </p>
+        </div>
+
+        <div class="stats">
+          <div class="stat-box">
+            <h3>25+</h3>
+            <p>Member Aktif</p>
+          </div>
+          <div class="stat-box">
+            <h3>2</h3>
+            <p>Divisi Game</p>
+          </div>
+          <div class="stat-box">
+            <h3>10+</h3>
+            <p>Event & Turnamen</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="divisi">
+    <div class="container">
+      <div class="section-title">
+        <h2>Divisi Game</h2>
+        <p>Dua divisi utama Neds Esport yang menjadi tempat siswa mengasah skill, strategi, komunikasi, dan mental kompetitif.</p>
+      </div>
+
+      <div class="division-grid">
+        <div class="division-card">
+          <div class="division-content">
+            <div class="division-badge">Divisi MOBA</div>
+            <h3>Mobile Legends: Bang Bang</h3>
+            <p>
+              Divisi MLBB berfokus pada kerja sama tim, draft hero, rotasi map, objektif turtle/lord,
+              dan strategi pertandingan 5v5 yang rapi dan disiplin.
+            </p>
+            <ul class="division-list">
+              <li>Latihan role: Jungler, Mid Laner, EXP, Gold Laner, dan Roamer</li>
+              <li>Scrim internal untuk membangun chemistry tim</li>
+              <li>Persiapan turnamen sekolah dan event komunitas</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="division-card">
+          <div class="division-content">
+            <div class="division-badge">Divisi Battle Royale</div>
+            <h3>Free Fire</h3>
+            <p>
+              Divisi Free Fire berfokus pada strategi rotasi, komunikasi squad, penguasaan zona,
+              pemilihan posisi, dan mental clutch saat pertandingan berlangsung.
+            </p>
+            <ul class="division-list">
+              <li>Latihan aim, movement, dan positioning</li>
+              <li>Strategi squad untuk mode ranked dan turnamen</li>
+              <li>Membangun gameplay cepat, solid, dan kompak</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="gallery">
+    <div class="container">
+      <div class="section-title">
+        <h2>Galeri</h2>
+        <p>Dokumentasi kegiatan, latihan, turnamen, dan momen terbaik komunitas kami.</p>
+      </div>
+
+      <div class="gallery-carousel">
+        <div class="gallery-track" id="galleryTrack">
+          <div class="gallery-slide">
+            <img src="https://images.unsplash.com/photo-1511512578047-dfb367046420?auto=format&fit=crop&w=1200&q=80" alt="Turnamen Internal" />
+            <div class="gallery-caption">
+              <h3>Turnamen</h3>
+              <p>Momen keikutsertaan Neds Esport dalam setiap kompetisi regional</p>
+            </div>
+          </div>
+
+          <div class="gallery-slide">
+            <img src="https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=1200&q=80" alt="Latihan Tim" />
+            <div class="gallery-caption">
+              <h3>Latihan Tim</h3>
+              <p>Dokumentasi latihan rutin untuk meningkatkan skill individu, komunikasi, dan chemistry tim.</p>
+            </div>
+          </div>
+
+          <div class="gallery-slide">
+            <img src="https://images.unsplash.com/photo-1493711662062-fa541adb3fc8?auto=format&fit=crop&w=1200&q=80" alt="Mabar Komunitas" />
+            <div class="gallery-caption">
+              <h3>Mabar Komunitas</h3>
+              <p>Kegiatan santai bersama member untuk menjaga kekompakan dan mempererat solidaritas komunitas.</p>
+            </div>
+          </div>
+
+          <div class="gallery-slide">
+            <img src="https://images.unsplash.com/photo-1542751110-97427bbecf20?auto=format&fit=crop&w=1200&q=80" alt="Kegiatan Esport" />
+            <div class="gallery-caption">
+              <h3>Kegiatan Esport</h3>
+              <p>Ruang dokumentasi untuk berbagai kegiatan, event, dan pencapaian Neds Esport.</p>
+            </div>
+          </div>
+        </div>
+
+        <button class="gallery-btn prev" onclick="moveSlide(-1)">&#10094;</button>
+        <button class="gallery-btn next" onclick="moveSlide(1)">&#10095;</button>
+
+        <div class="gallery-dots">
+          <button class="gallery-dot active" onclick="goToSlide(0)"></button>
+          <button class="gallery-dot" onclick="goToSlide(1)"></button>
+          <button class="gallery-dot" onclick="goToSlide(2)"></button>
+          <button class="gallery-dot" onclick="goToSlide(3)"></button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="member">
+    <div class="container">
+      <div class="section-title">
+        <h2>Member</h2>
+        <p>Beberapa anggota aktif dari komunitas esport kami.</p>
+      </div>
+
+      <div class="member-grid">
+        <div class="member-card">
+          <img src="https://images.unsplash.com/photo-1599566150163-29194dcaad36?auto=format&fit=crop&w=700&q=80" alt="Member 1" />
+          <div class="member-info">
+            <h3>Nama Member 1</h3>
+            <p>Role: Captain</p>
+          </div>
+        </div>
+
+        <div class="member-card">
+          <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=700&q=80" alt="Member 2" />
+          <div class="member-info">
+            <h3>Nama Member 2</h3>
+            <p>Role: Player</p>
+          </div>
+        </div>
+
+        <div class="member-card">
+          <img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=700&q=80" alt="Member 3" />
+          <div class="member-info">
+            <h3>Nama Member 3</h3>
+            <p>Role: Player</p>
+          </div>
+        </div>
+
+        <div class="member-card">
+          <img src="https://images.unsplash.com/photo-1527980965255-d3b416303d12?auto=format&fit=crop&w=700&q=80" alt="Member 4" />
+          <div class="member-info">
+            <h3>Nama Member 4</h3>
+            <p>Role: Content Creator</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="absensi">
+    <div class="container">
+      <div class="attendance-box">
+        <div class="attendance-content">
+          <h2>Absensi Member</h2>
+          <p>
+            Untuk setiap latihan, kumpul komunitas, sparing, atau kegiatan Neds Esport,
+            seluruh member wajib mengisi absensi melalui Google Form resmi.
+          </p>
+          <ul class="attendance-list">
+            <li>Isi absensi saat hadir kegiatan</li>
+            <li>Gunakan nama lengkap agar mudah direkap</li>
+            <li>Pastikan data yang dikirim sudah benar</li>
+          </ul>
+        </div>
+
+        <div class="attendance-action">
+          <div class="attendance-icon">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M19 3h-1V1h-2v2H8V1H6v2H5a2.99 2.99 0 0 0-3 3v14a2.99 2.99 0 0 0 3 3h14a2.99 2.99 0 0 0 3-3V6a2.99 2.99 0 0 0-3-3Zm1 17a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-9h16v9ZM4 9V6a1 1 0 0 1 1-1h1v2h2V5h8v2h2V5h1a1 1 0 0 1 1 1v3H4Zm12.3 4.3 1.4 1.4-6.2 6.2-3.7-3.7 1.4-1.4 2.3 2.3 4.8-4.8Z" />
+            </svg>
+          </div>
+          <h3>Form Absensi</h3>
+          <p>Klik tombol di bawah untuk membuka Google Form absensi.</p>
+          <a class="btn btn-primary" href="https://docs.google.com/forms/d/e/1FAIpQLSeCJljlL3lRB2oiXKkX6luMWIQEVgyJlOrqhN-wAZsbq3uckQ/viewform?usp=sharing&ouid=111990870390451253032" target="_blank">Buka Form Absensi</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="sosmed">
+    <div class="container">
+      <div class="social-box">
+        <h2>Ikuti Sosial Media Kami</h2>
+        <p>
+          Jangan sampai ketinggalan info turnamen, dokumentasi kegiatan, jadwal latihan,
+          dan update terbaru dari komunitas esport kami.
+        </p>
+
+        <div class="social-links">
+          <a href="https://www.instagram.com/esport.smknedas?igsh=Nzh3ZTl0dGM2cWZw" target="_blank">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M7.75 2h8.5A5.76 5.76 0 0 1 22 7.75v8.5A5.76 5.76 0 0 1 16.25 22h-8.5A5.76 5.76 0 0 1 2 16.25v-8.5A5.76 5.76 0 0 1 7.75 2Zm0 2A3.75 3.75 0 0 0 4 7.75v8.5A3.75 3.75 0 0 0 7.75 20h8.5A3.75 3.75 0 0 0 20 16.25v-8.5A3.75 3.75 0 0 0 16.25 4h-8.5ZM12 7a5 5 0 1 1 0 10 5 5 0 0 1 0-10Zm0 2a3 3 0 1 0 0 6 3 3 0 0 0 0-6Zm5.25-2.45a1.2 1.2 0 1 1 0 2.4 1.2 1.2 0 0 1 0-2.4Z" />
+            </svg>
+            Instagram
+          </a>
+
+          <a href="https://tiktok.com/" target="_blank">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M16.6 5.82a5.9 5.9 0 0 0 3.45 1.1v3.1a9.1 9.1 0 0 1-3.44-.72v5.95A6.25 6.25 0 1 1 10.36 9v3.22a3.14 3.14 0 1 0 3.14 3.14V2h3.1v3.82Z" />
+            </svg>
+            TikTok
+          </a>
+
+          <a href="https://youtube.com/" target="_blank">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M21.58 7.2a2.72 2.72 0 0 0-1.91-1.92C18 4.83 12 4.83 12 4.83s-6 0-7.67.45A2.72 2.72 0 0 0 2.42 7.2 28.5 28.5 0 0 0 2 12a28.5 28.5 0 0 0 .42 4.8 2.72 2.72 0 0 0 1.91 1.92c1.67.45 7.67.45 7.67.45s6 0 7.67-.45a2.72 2.72 0 0 0 1.91-1.92A28.5 28.5 0 0 0 22 12a28.5 28.5 0 0 0-.42-4.8ZM10 15.2V8.8l5.5 3.2L10 15.2Z" />
+            </svg>
+            YouTube
+          </a>
+
+          <a href="https://chat.whatsapp.com/EjsRCff7dgiB3kIChR8tX7" target="_blank">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M12.04 2a9.9 9.9 0 0 0-8.48 15.02L2.4 22l5.1-1.1A9.9 9.9 0 1 0 12.04 2Zm0 2a7.9 7.9 0 0 1 0 15.8 7.8 7.8 0 0 1-3.76-.96l-.36-.2-2.46.53.55-2.38-.24-.38A7.9 7.9 0 0 1 12.04 4Zm-3.38 3.98c-.18 0-.47.07-.72.34-.25.27-.95.93-.95 2.27s.97 2.63 1.1 2.81c.14.18 1.88 3.01 4.66 4.1 2.3.9 2.78.72 3.28.68.5-.05 1.63-.66 1.86-1.3.23-.64.23-1.18.16-1.3-.07-.11-.25-.18-.52-.32-.27-.14-1.63-.8-1.88-.89-.25-.09-.43-.14-.62.14-.18.27-.7.89-.86 1.07-.16.18-.32.2-.59.07-.27-.14-1.14-.42-2.17-1.34-.8-.71-1.34-1.6-1.5-1.87-.16-.27-.02-.42.12-.55.13-.12.27-.32.41-.48.14-.16.18-.27.27-.45.09-.18.05-.34-.02-.48-.07-.14-.62-1.5-.85-2.06-.22-.54-.45-.47-.62-.48h-.53Z" />
+            </svg>
+            WhatsApp
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <p>© 2026 SMKN 2 Sukorejo - Neds Esport. All Rights Reserved.</p>
+    </div>
+  </footer>
+
+  <script>
+    let currentSlide = 0;
+    const track = document.getElementById("galleryTrack");
+    const dots = document.querySelectorAll(".gallery-dot");
+    const totalSlides = dots.length;
+
+    function updateCarousel() {
+      track.style.transform = `translateX(-${currentSlide * 100}%)`;
+
+      dots.forEach((dot, index) => {
+        dot.classList.toggle("active", index === currentSlide);
+      });
+    }
+
+    function moveSlide(direction) {
+      currentSlide += direction;
+
+      if (currentSlide < 0) {
+        currentSlide = totalSlides - 1;
+      }
+
+      if (currentSlide >= totalSlides) {
+        currentSlide = 0;
+      }
+
+      updateCarousel();
+    }
+
+    function goToSlide(index) {
+      currentSlide = index;
+      updateCarousel();
+    }
+
+    setInterval(() => {
+      moveSlide(1);
+    }, 4500);
+  </script>
+
+</body>
+</html>
