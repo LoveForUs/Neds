@@ -15,12 +15,14 @@
 
     html {
       scroll-behavior: smooth;
+      scroll-padding-top: 92px;
     }
 
     body {
       background: #0d0d0d;
       color: #ffffff;
       line-height: 1.6;
+      overflow-x: hidden;
     }
 
     a {
@@ -29,9 +31,12 @@
     }
 
     .container {
-      width: 90%;
-      max-width: 1200px;
+      width: min(90%, 1200px);
       margin: auto;
+    }
+
+    img {
+      max-width: 100%;
     }
 
     header {
@@ -67,8 +72,45 @@
       border-radius: 10px;
     }
 
+    .nav-toggle {
+      display: none;
+      width: 44px;
+      height: 44px;
+      border: 1px solid rgba(255, 122, 0, 0.35);
+      border-radius: 12px;
+      background: rgba(255, 122, 0, 0.08);
+      color: #ffffff;
+      cursor: pointer;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: 5px;
+    }
+
+    .nav-toggle span {
+      display: block;
+      width: 22px;
+      height: 2px;
+      background: #ff7a00;
+      border-radius: 999px;
+      transition: 0.3s;
+    }
+
+    .nav-toggle.active span:nth-child(1) {
+      transform: translateY(7px) rotate(45deg);
+    }
+
+    .nav-toggle.active span:nth-child(2) {
+      opacity: 0;
+    }
+
+    .nav-toggle.active span:nth-child(3) {
+      transform: translateY(-7px) rotate(-45deg);
+    }
+
     .nav-links {
       display: flex;
+      align-items: center;
       gap: 24px;
       font-size: 15px;
     }
@@ -104,7 +146,7 @@
       object-fit: cover;
       opacity: 0;
       transform: scale(1.08);
-      animation: heroSlideshow 18s infinite;
+      animation: heroSlideshow 24s infinite;
     }
 
     .hero-bg img:nth-child(1) {
@@ -117,6 +159,10 @@
 
     .hero-bg img:nth-child(3) {
       animation-delay: 12s;
+    }
+
+    .hero-bg img:nth-child(4) {
+      animation-delay: 18s;
     }
 
     .hero::after {
@@ -136,11 +182,11 @@
       8% {
         opacity: 1;
       }
-      33% {
+      25% {
         opacity: 1;
         transform: scale(1);
       }
-      41% {
+      33% {
         opacity: 0;
         transform: scale(1);
       }
@@ -165,15 +211,6 @@
       box-shadow: 0 25px 60px rgba(0, 0, 0, 0.45);
     }
 
-    .hero-logo {
-      width: 190px;
-      max-width: 70%;
-      height: auto;
-      display: block;
-      margin-bottom: 22px;
-      filter: drop-shadow(0 12px 28px rgba(255, 122, 0, 0.28));
-    }
-
     .badge {
       display: inline-block;
       background: rgba(255, 122, 0, 0.15);
@@ -186,7 +223,7 @@
     }
 
     .hero h1 {
-      font-size: clamp(42px, 7vw, 76px);
+      font-size: clamp(34px, 7vw, 76px);
       line-height: 1.05;
       margin-bottom: 20px;
     }
@@ -209,6 +246,7 @@
     }
 
     .btn {
+      text-align: center;
       padding: 13px 22px;
       border-radius: 10px;
       font-weight: bold;
@@ -493,15 +531,42 @@
       background: #ff7a00;
     }
 
-    .member-grid {
+    .member-carousel {
+      position: relative;
+    }
+
+    .member-track {
       display: grid;
-      grid-template-columns: repeat(4, 1fr);
+      grid-auto-flow: column;
+      grid-auto-columns: calc((100% - 66px) / 4);
       gap: 22px;
+      overflow-x: auto;
+      overflow-y: hidden;
+      scroll-behavior: smooth;
+      scroll-snap-type: x mandatory;
+      padding: 8px 4px 18px;
+      scrollbar-width: thin;
+      scrollbar-color: #ff7a00 #171717;
+    }
+
+    .member-track::-webkit-scrollbar {
+      height: 9px;
+    }
+
+    .member-track::-webkit-scrollbar-track {
+      background: #171717;
+      border-radius: 999px;
+    }
+
+    .member-track::-webkit-scrollbar-thumb {
+      background: #ff7a00;
+      border-radius: 999px;
     }
 
     .member-card {
+      scroll-snap-align: start;
       background: #171717;
-      border-radius: 20px;
+      border-radius: 18px;
       overflow: hidden;
       border: 1px solid rgba(255, 122, 0, 0.22);
       text-align: center;
@@ -509,28 +574,66 @@
     }
 
     .member-card:hover {
-      transform: translateY(-8px);
+      transform: translateY(-6px);
       border-color: #ff7a00;
     }
 
     .member-card img {
       width: 100%;
-      height: 250px;
+      height: 170px;
       object-fit: cover;
     }
 
     .member-info {
-      padding: 20px;
+      padding: 14px 12px 16px;
     }
 
     .member-info h3 {
       color: #ffffff;
-      margin-bottom: 5px;
+      margin-bottom: 4px;
+      font-size: 16px;
+    }
+
+    .member-division {
+      display: inline-block;
+      margin-bottom: 6px;
+      padding: 4px 9px;
+      border-radius: 999px;
+      background: rgba(255, 122, 0, 0.13);
+      color: #ff9f3f;
+      border: 1px solid rgba(255, 122, 0, 0.28);
+      font-size: 12px;
+      font-weight: bold;
     }
 
     .member-info p {
-      color: #ff9f3f;
-      font-size: 14px;
+      color: #d8d8d8;
+      font-size: 13px;
+    }
+
+    .member-controls {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      margin-top: 20px;
+    }
+
+    .member-btn {
+      width: 44px;
+      height: 44px;
+      border: none;
+      border-radius: 50%;
+      background: #ff7a00;
+      color: #111111;
+      font-size: 24px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .member-btn:hover {
+      background: #ffffff;
+      transform: translateY(-3px);
     }
 
     .attendance-box {
@@ -684,42 +787,185 @@
       border-top: 1px solid rgba(255, 122, 0, 0.25);
     }
 
+    @media (max-width: 1100px) {
+      .nav-links {
+        gap: 14px;
+        font-size: 14px;
+      }
+
+      .member-track {
+        grid-auto-columns: calc((100% - 44px) / 3);
+      }
+    }
+
     @media (max-width: 900px) {
+      nav {
+        position: relative;
+      }
+
+      .nav-toggle {
+        display: inline-flex;
+      }
+
+      .nav-links {
+        position: absolute;
+        top: calc(100% + 14px);
+        right: 0;
+        width: min(320px, 90vw);
+        display: grid;
+        gap: 6px;
+        padding: 16px;
+        border-radius: 18px;
+        background: rgba(13, 13, 13, 0.98);
+        border: 1px solid rgba(255, 122, 0, 0.28);
+        box-shadow: 0 20px 45px rgba(0, 0, 0, 0.45);
+        transform: translateY(-8px);
+        opacity: 0;
+        pointer-events: none;
+        transition: 0.25s ease;
+      }
+
+      .nav-links.active {
+        transform: translateY(0);
+        opacity: 1;
+        pointer-events: auto;
+      }
+
+      .nav-links a {
+        padding: 12px 14px;
+        border-radius: 12px;
+        background: rgba(255, 255, 255, 0.04);
+      }
+
+      .nav-links a:hover {
+        background: rgba(255, 122, 0, 0.14);
+      }
+
+      .hero {
+        min-height: auto;
+        padding: 90px 0;
+      }
+
+      .hero-content {
+        max-width: 620px;
+      }
+
       .about-grid,
       .division-grid,
-      .member-grid,
       .attendance-box {
-        grid-template-columns: 1fr 1fr;
+        grid-template-columns: 1fr;
+      }
+
+      .stats {
+        grid-template-columns: repeat(3, 1fr);
+      }
+
+      .gallery-slide {
+        height: 440px;
+      }
+    }
+
+    @media (max-width: 650px) {
+      .container {
+        width: min(92%, 1200px);
+      }
+
+      nav {
+        padding: 12px 0;
+      }
+
+      .logo {
+        font-size: 17px;
+      }
+
+      .logo img {
+        width: 40px;
+        height: 40px;
+      }
+
+      .hero {
+        padding: 64px 0;
+        align-items: flex-start;
+      }
+
+      .hero::after {
+        background: rgba(0, 0, 0, 0.08);
+      }
+
+      .hero-content {
+        padding: 22px;
+        border-radius: 20px;
+        background: rgba(0, 0, 0, 0.74);
+      }
+
+      .badge {
+        font-size: 12px;
+        margin-bottom: 14px;
+      }
+
+      .hero h1 {
+        font-size: clamp(32px, 11vw, 46px);
+        line-height: 1.1;
+      }
+
+      .hero p {
+        font-size: 15px;
+        margin-bottom: 24px;
+      }
+
+      .btn-group {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 10px;
+      }
+
+      .btn {
+        width: 100%;
+        padding: 13px 16px;
+      }
+
+      section {
+        padding: 62px 0;
+      }
+
+      .section-title {
+        margin-bottom: 32px;
+      }
+
+      .section-title h2 {
+        font-size: 30px;
+      }
+
+      .section-title p {
+        font-size: 15px;
+      }
+
+      .about-card,
+      .division-card,
+      .attendance-box,
+      .social-box {
+        border-radius: 20px;
+      }
+
+      .about-card,
+      .division-card {
+        padding: 24px;
       }
 
       .stats {
         grid-template-columns: 1fr;
       }
-    }
 
-    @media (max-width: 650px) {
-      .nav-links {
-        display: none;
+      .division-card {
+        min-height: auto;
       }
 
-      .hero {
-        min-height: 82vh;
+      .division-card h3 {
+        font-size: 25px;
       }
 
-      .hero-content {
-        padding: 24px;
+      .gallery-carousel {
         border-radius: 20px;
-        background: rgba(0, 0, 0, 0.72);
-      }
-
-      .about-grid,
-      .division-grid,
-      .member-grid {
-        grid-template-columns: 1fr;
-      }
-
-      section {
-        padding: 70px 0;
       }
 
       .gallery-slide {
@@ -727,11 +973,16 @@
       }
 
       .gallery-caption {
-        padding: 24px;
+        padding: 22px;
+        padding-bottom: 42px;
       }
 
       .gallery-caption h3 {
-        font-size: 24px;
+        font-size: 23px;
+      }
+
+      .gallery-caption p {
+        font-size: 14px;
       }
 
       .gallery-btn {
@@ -740,16 +991,76 @@
         font-size: 20px;
       }
 
+      .gallery-btn.prev {
+        left: 10px;
+      }
+
+      .gallery-btn.next {
+        right: 10px;
+      }
+
+      .member-track {
+        grid-auto-columns: calc((100% - 16px) / 2);
+        gap: 16px;
+      }
+
+      .member-card img {
+        height: 145px;
+      }
+
+      .member-info h3 {
+        font-size: 15px;
+      }
+
+      .member-division {
+        font-size: 11px;
+      }
+
+      .member-info p {
+        font-size: 12px;
+      }
+
       .attendance-box {
-        padding: 30px 20px;
+        padding: 24px;
       }
 
       .attendance-content h2 {
-        font-size: 30px;
+        font-size: 28px;
+      }
+
+      .attendance-action {
+        padding: 22px;
       }
 
       .social-box {
-        padding: 30px 20px;
+        padding: 28px 20px;
+      }
+
+      .social-box h2 {
+        font-size: 28px;
+      }
+
+      .social-links {
+        display: grid;
+        grid-template-columns: 1fr;
+      }
+
+      .social-links a {
+        justify-content: center;
+      }
+    }
+
+    @media (max-width: 420px) {
+      .hero h1 {
+        font-size: 30px;
+      }
+
+      .gallery-slide {
+        height: 320px;
+      }
+
+      .member-track {
+        grid-auto-columns: 76%;
       }
     }
   </style>
@@ -763,7 +1074,13 @@
           <img src="assets/neds-logo.png" alt="Logo NEDS Esport" />
           <span>NEDS ESPORT</span>
         </div>
-        <div class="nav-links">
+        <button class="nav-toggle" id="navToggle" aria-label="Buka menu navigasi" aria-expanded="false">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+
+        <div class="nav-links" id="navLinks">
           <a href="#home">Home</a>
           <a href="#about">About Us</a>
           <a href="#divisi">Divisi Game</a>
@@ -778,14 +1095,14 @@
 
   <section class="hero" id="home">
     <div class="hero-bg">
-      <img src="https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&w=1600&q=80" alt="Background Esport 1" />
-      <img src="https://images.unsplash.com/photo-1511512578047-dfb367046420?auto=format&fit=crop&w=1600&q=80" alt="Background Esport 2" />
-      <img src="https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=1600&q=80" alt="Background Esport 3" />
+      <img src="assets/gallery/galeri-1.jpg" alt="Background Galeri 1" />
+      <img src="assets/gallery/galeri-2.jpg" alt="Background Galeri 2" />
+      <img src="assets/gallery/galeri-3.jpg" alt="Background Galeri 3" />
+      <img src="assets/gallery/galeri-4.jpg" alt="Background Galeri 4" />
     </div>
 
     <div class="container">
       <div class="hero-content">
-        <img class="hero-logo" src="assets/neds-logo.png" alt="Logo NEDS Esport" />
         <div class="badge">Official Esport Community</div>
         <h1>SMK Negeri 2 Sukorejo <span>Esport</span></h1>
         <p>
@@ -892,7 +1209,7 @@
       <div class="gallery-carousel">
         <div class="gallery-track" id="galleryTrack">
           <div class="gallery-slide">
-            <img src="https://images.unsplash.com/photo-1511512578047-dfb367046420?auto=format&fit=crop&w=1200&q=80" alt="Turnamen Internal" />
+            <img src="assets/gallery/galeri-1.jpg" alt="Turnamen Internal" />
             <div class="gallery-caption">
               <h3>Turnamen</h3>
               <p>Momen keikutsertaan Neds Esport dalam setiap kompetisi regional</p>
@@ -900,7 +1217,7 @@
           </div>
 
           <div class="gallery-slide">
-            <img src="https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=1200&q=80" alt="Latihan Tim" />
+            <img src="assets/gallery/galeri-2.jpg" alt="Latihan Tim" />
             <div class="gallery-caption">
               <h3>Latihan Tim</h3>
               <p>Dokumentasi latihan rutin untuk meningkatkan skill individu, komunikasi, dan chemistry tim.</p>
@@ -908,7 +1225,7 @@
           </div>
 
           <div class="gallery-slide">
-            <img src="https://images.unsplash.com/photo-1493711662062-fa541adb3fc8?auto=format&fit=crop&w=1200&q=80" alt="Mabar Komunitas" />
+            <img src="assets/gallery/galeri-3.jpg" alt="Mabar Komunitas" />
             <div class="gallery-caption">
               <h3>Mabar Komunitas</h3>
               <p>Kegiatan santai bersama member untuk menjaga kekompakan dan mempererat solidaritas komunitas.</p>
@@ -916,7 +1233,7 @@
           </div>
 
           <div class="gallery-slide">
-            <img src="https://images.unsplash.com/photo-1542751110-97427bbecf20?auto=format&fit=crop&w=1200&q=80" alt="Kegiatan Esport" />
+            <img src="assets/gallery/galeri-4.jpg" alt="Kegiatan Esport" />
             <div class="gallery-caption">
               <h3>Kegiatan Esport</h3>
               <p>Ruang dokumentasi untuk berbagai kegiatan, event, dan pencapaian Neds Esport.</p>
@@ -944,37 +1261,84 @@
         <p>Beberapa anggota aktif dari komunitas esport kami.</p>
       </div>
 
-      <div class="member-grid">
-        <div class="member-card">
-          <img src="https://images.unsplash.com/photo-1599566150163-29194dcaad36?auto=format&fit=crop&w=700&q=80" alt="Member 1" />
-          <div class="member-info">
-            <h3>Nama Member 1</h3>
-            <p>Role: Captain</p>
+      <div class="member-carousel">
+        <div class="member-track" id="memberTrack">
+          <div class="member-card">
+            <img src="https://images.unsplash.com/photo-1599566150163-29194dcaad36?auto=format&fit=crop&w=700&q=80" alt="Member 1" />
+            <div class="member-info">
+              <h3>Nama Member 1</h3>
+              <span class="member-division">Divisi: MLBB</span>
+              <p>Role: Captain</p>
+            </div>
+          </div>
+
+          <div class="member-card">
+            <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=700&q=80" alt="Member 2" />
+            <div class="member-info">
+              <h3>Nama Member 2</h3>
+              <span class="member-division">Divisi: Free Fire</span>
+              <p>Role: Player</p>
+            </div>
+          </div>
+
+          <div class="member-card">
+            <img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=700&q=80" alt="Member 3" />
+            <div class="member-info">
+              <h3>Nama Member 3</h3>
+              <span class="member-division">Divisi: MLBB</span>
+              <p>Role: Player</p>
+            </div>
+          </div>
+
+          <div class="member-card">
+            <img src="https://images.unsplash.com/photo-1527980965255-d3b416303d12?auto=format&fit=crop&w=700&q=80" alt="Member 4" />
+            <div class="member-info">
+              <h3>Nama Member 4</h3>
+              <span class="member-division">Divisi: MLBB</span>
+              <p>Role: Roamer</p>
+            </div>
+          </div>
+
+          <div class="member-card">
+            <img src="https://images.unsplash.com/photo-1607746882042-944635dfe10e?auto=format&fit=crop&w=700&q=80" alt="Member 5" />
+            <div class="member-info">
+              <h3>Nama Member 5</h3>
+              <span class="member-division">Divisi: MLBB</span>
+              <p>Role: Jungler</p>
+            </div>
+          </div>
+
+          <div class="member-card">
+            <img src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=700&q=80" alt="Member 6" />
+            <div class="member-info">
+              <h3>Nama Member 6</h3>
+              <span class="member-division">Divisi: MLBB</span>
+              <p>Role: Gold Laner</p>
+            </div>
+          </div>
+
+          <div class="member-card">
+            <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=700&q=80" alt="Member 7" />
+            <div class="member-info">
+              <h3>Nama Member 7</h3>
+              <span class="member-division">Divisi: Free Fire</span>
+              <p>Role: Rusher</p>
+            </div>
+          </div>
+
+          <div class="member-card">
+            <img src="https://images.unsplash.com/photo-1544723795-3fb6469f5b39?auto=format&fit=crop&w=700&q=80" alt="Member 8" />
+            <div class="member-info">
+              <h3>Nama Member 8</h3>
+              <span class="member-division">Divisi: Media</span>
+              <p>Role: Content Creator</p>
+            </div>
           </div>
         </div>
 
-        <div class="member-card">
-          <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=700&q=80" alt="Member 2" />
-          <div class="member-info">
-            <h3>Nama Member 2</h3>
-            <p>Role: Player</p>
-          </div>
-        </div>
-
-        <div class="member-card">
-          <img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=700&q=80" alt="Member 3" />
-          <div class="member-info">
-            <h3>Nama Member 3</h3>
-            <p>Role: Player</p>
-          </div>
-        </div>
-
-        <div class="member-card">
-          <img src="https://images.unsplash.com/photo-1527980965255-d3b416303d12?auto=format&fit=crop&w=700&q=80" alt="Member 4" />
-          <div class="member-info">
-            <h3>Nama Member 4</h3>
-            <p>Role: Content Creator</p>
-          </div>
+        <div class="member-controls">
+          <button class="member-btn" onclick="scrollMember(-1)" aria-label="Geser member ke kiri">&#10094;</button>
+          <button class="member-btn" onclick="scrollMember(1)" aria-label="Geser member ke kanan">&#10095;</button>
         </div>
       </div>
     </div>
@@ -1094,6 +1458,35 @@
     setInterval(() => {
       moveSlide(1);
     }, 4500);
+
+    const navToggle = document.getElementById("navToggle");
+    const navLinks = document.getElementById("navLinks");
+
+    navToggle.addEventListener("click", () => {
+      const isOpen = navLinks.classList.toggle("active");
+      navToggle.classList.toggle("active", isOpen);
+      navToggle.setAttribute("aria-expanded", isOpen);
+    });
+
+    document.querySelectorAll(".nav-links a").forEach((link) => {
+      link.addEventListener("click", () => {
+        navLinks.classList.remove("active");
+        navToggle.classList.remove("active");
+        navToggle.setAttribute("aria-expanded", "false");
+      });
+    });
+
+    function scrollMember(direction) {
+      const memberTrack = document.getElementById("memberTrack");
+      const memberCard = memberTrack.querySelector(".member-card");
+      const gap = 22;
+      const scrollAmount = memberCard.offsetWidth + gap;
+
+      memberTrack.scrollBy({
+        left: direction * scrollAmount,
+        behavior: "smooth"
+      });
+    }
   </script>
 
 </body>
